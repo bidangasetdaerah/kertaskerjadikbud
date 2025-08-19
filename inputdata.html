@@ -15,78 +15,80 @@
   body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans'; }
 </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex">
+<body class="bg-gray-50 flex flex-col min-h-screen">
 
-<!-- Sidebar -->
-<nav class="w-64 bg-white shadow-md border-r border-gray-200 flex flex-col">
-  <div class="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-8 w-auto object-contain" loading="lazy" />
-    <span class="text-lg font-semibold text-blue-700">ASET DIKBUD</span>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-8 w-auto object-contain ml-auto" loading="lazy" />
-  </div>
-
-  <div class="group border-b border-gray-200">
-    <a href="index.html" class="px-6 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 block">Master Data</a>
-  </div>
-
-  <!-- KIB Dropdown -->
-  <div class="group border-b border-gray-200">
-    <button id="kibBtn" class="w-full flex justify-between items-center px-6 py-3 hover:bg-blue-100 focus:outline-none">
-      <span class="font-medium text-gray-700">KIB</span>
-      <svg id="kibArrow" class="w-4 h-4 text-gray-500 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-    <div id="kibDropdown" class="hidden flex flex-col bg-gray-50 border-t border-gray-200">
-      <a href="inputdata.html" class="px-10 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50">Input KIB B</a>
-      <a href="#" class="px-10 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50">Input KIB C</a>
-    </div>
-  </div>
-</nav>
-
-<!-- Konten utama -->
-<div class="flex-1 ml-64">
-  <header class="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b">
-    <div class="mx-auto max-w-6xl px-4 py-4 flex items-center gap-3">
-      <div class="flex items-center gap-2 mr-2">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-10 w-auto object-contain" loading="lazy" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-10 w-auto object-contain" loading="lazy" />
-      </div>
-      <i class="bi bi-link-45deg text-2xl"></i>
-      <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">INPUT DATA ASET SEKOLAH – KIB B</h1>
-    </div>
-  </header>
-
-  <main class="mx-auto max-w-6xl px-4 py-6">
-    <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 mb-6">
-      <div class="relative flex-1">
-        <input id="search" type="text" placeholder="Cari kecamatan…" class="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        <i class="bi bi-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-      </div>
-      <div class="flex items-center gap-2">
-        <button id="btnShowAll" class="rounded-2xl border px-4 py-2.5 shadow-sm hover:shadow transition duration-150">Semua</button>
-        <button id="btnShowAvailable" class="rounded-2xl border px-4 py-2.5 shadow-sm hover:shadow transition duration-150">Tersedia</button>
-        <button id="btnShowMissing" class="rounded-2xl border px-4 py-2.5 shadow-sm hover:shadow transition duration-150">Belum Ada</button>
-      </div>
+<div class="flex flex-1">
+  <!-- Sidebar -->
+  <nav class="w-64 bg-white shadow-md border-r border-gray-200 flex flex-col">
+    <div class="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-8 w-auto object-contain" loading="lazy" />
+      <span class="text-lg font-semibold text-blue-700">ASET DIKBUD</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-8 w-auto object-contain ml-auto" loading="lazy" />
     </div>
 
-    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"></div>
-  </main>
+    <div class="group border-b border-gray-200">
+      <a href="index.html" class="px-6 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 block">Master Data</a>
+    </div>
+
+    <!-- KIB Dropdown -->
+    <div class="group border-b border-gray-200">
+      <button id="kibBtn" class="w-full flex justify-between items-center px-6 py-3 hover:bg-blue-100 focus:outline-none">
+        <span class="font-medium text-gray-700">KIB</span>
+        <svg id="kibArrow" class="w-4 h-4 text-gray-500 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      <div id="kibDropdown" class="hidden flex flex-col bg-gray-50 border-t border-gray-200">
+        <a href="inputdata.html" class="px-10 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50">Input KIB B</a>
+        <a href="#" class="px-10 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50">Input KIB C</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Konten utama -->
+  <div class="flex-1 ml-64">
+    <header class="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
+        <div class="flex items-center gap-2 mr-2">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-10 w-auto object-contain" loading="lazy" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-10 w-auto object-contain" loading="lazy" />
+        </div>
+        <i class="bi bi-link-45deg text-2xl"></i>
+        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">INPUT DATA ASET SEKOLAH – KIB B</h1>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-4">
+      <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 mb-6">
+        <div class="relative flex-1">
+          <input id="search" type="text" placeholder="Cari kecamatan…" class="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <i class="bi bi-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btnShowAll" class="rounded-2xl border px-3 py-2 shadow-sm hover:shadow transition duration-150">Semua</button>
+          <button id="btnShowAvailable" class="rounded-2xl border px-3 py-2 shadow-sm hover:shadow transition duration-150">Tersedia</button>
+          <button id="btnShowMissing" class="rounded-2xl border px-3 py-2 shadow-sm hover:shadow transition duration-150">Belum Ada</button>
+        </div>
+      </div>
+
+      <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4"></div>
+    </main>
+  </div>
 </div>
 
 <!-- Footer -->
-<footer class="w-full bg-gradient-to-r from-blue-600 to-green-600 py-5 px-6 shadow-inner relative">
+<footer class="w-full bg-gradient-to-r from-blue-600 to-green-600 py-3 px-4 shadow-inner relative">
   <div class="text-center">
-    <p class="text-base md:text-lg text-white font-bold tracking-wide"
-       style="text-shadow: 0 0 8px rgba(255,255,255,0.7);">
+    <p class="text-sm md:text-base text-white font-bold tracking-wide"
+       style="text-shadow: 0 0 6px rgba(255,255,255,0.7);">
       DINAS PENDIDIKAN DAN KEBUDAYAAN
     </p>
-    <p class="text-sm text-white font-semibold tracking-wide"
-       style="text-shadow: 0 0 6px rgba(255,255,255,0.7);">
+    <p class="text-xs text-white font-semibold tracking-wide"
+       style="text-shadow: 0 0 4px rgba(255,255,255,0.7);">
       KOMBEL TONDA TALUSI - SOU BATIK
     </p>
   </div>
-  <p class="absolute bottom-2 right-4 text-xs md:text-sm text-white/90 font-medium tracking-wide">
+  <p class="absolute bottom-1 right-3 text-[10px] md:text-xs text-white/90 font-medium tracking-wide">
     Terakhir diperbarui: <span id="now"></span>
   </p>
 </footer>
@@ -129,7 +131,7 @@
   let currentMode = 'all';
 
   function badge(available) {
-    return `<span class="ml-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] transition-colors ${available ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'}">
+    return `<span class="ml-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] ${available ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'}">
       <i class="bi ${available ? 'bi-check-circle' : 'bi-dash-circle'}"></i>${available ? 'Tersedia' : 'Belum ada'}</span>`;
   }
 
@@ -140,15 +142,15 @@
         <div class="p-4">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <h3 class="text-lg font-semibold">${item.name} ${badge(available)}</h3>
-              <p class="mt-1 text-sm text-gray-500">Master Data kecamatan</p>
+              <h3 class="text-base font-semibold">${item.name} ${badge(available)}</h3>
+              <p class="mt-1 text-xs text-gray-500">Master Data kecamatan</p>
             </div>
-            <i class="bi bi-folder2-open text-xl text-indigo-600 opacity-80 group-hover:opacity-100"></i>
+            <i class="bi bi-folder2-open text-lg text-indigo-600 opacity-80 group-hover:opacity-100"></i>
           </div>
-          <div class="mt-4 flex items-center gap-2">
+          <div class="mt-3 flex items-center gap-2">
             ${available
-              ? `<a href="${item.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100"><i class='bi bi-box-arrow-up-right'></i>Input Data</a>`
-              : `<button disabled aria-disabled="true" class="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm text-gray-400 bg-gray-100 cursor-not-allowed"><i class='bi bi-slash-circle'></i>Tidak tersedia</button>`}
+              ? `<a href="${item.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-2.5 py-1.5 text-xs font-medium text-indigo-700 hover:bg-indigo-100"><i class='bi bi-box-arrow-up-right'></i>Input Data</a>`
+              : `<button disabled aria-disabled="true" class="inline-flex items-center gap-2 rounded-xl border px-2.5 py-1.5 text-xs text-gray-400 bg-gray-100 cursor-not-allowed"><i class='bi bi-slash-circle'></i>Tidak tersedia</button>`}
           </div>
         </div>
       </div>`;
@@ -169,7 +171,6 @@
     });
   }
 
-  // Initial render
   render(data);
 
   // Search
