@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Input Data Aset Sekolah – KIB B</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-green-50 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b flex items-center">
+    <div class="w-full px-4 py-4 flex items-center gap-3">
+      <!-- Tombol menu HP -->
+      <button id="menuToggle" class="md:hidden p-2 rounded-lg border bg-white shadow-sm">
+        <i class="bi bi-list text-2xl"></i>
+      </button>
+      <div class="flex items-center gap-2 mr-2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-10 w-auto object-contain" loading="lazy" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-10 w-auto object-contain" loading="lazy" />
+      </div>
+      <!-- Judul -->
+      <h1 class="text-xl md:text-2xl font-extrabold tracking-tight ml-2 md:ml-4">
+        INPUT DATA ASET SEKOLAH – KIB B
+      </h1>
+    </div>
+  </header>
+
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <nav id="sidebar"
+         class="fixed md:static inset-y-0 left-0 z-40 w-64 bg-white/90 backdrop-blur-md border-r shadow-md transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out flex-shrink-0">
+      <div class="p-4 space-y-2">
+        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-blue-700 bg-blue-100 font-semibold">
+          <i class="bi bi-house-door"></i> Dashboard
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+          <i class="bi bi-database"></i> Master Data
+        </a>
+        <button id="kibBtn" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+          <span class="flex items-center gap-3"><i class="bi bi-archive"></i> Input KIB</span>
+          <i class="bi bi-chevron-right transition-transform" id="kibArrow"></i>
+        </button>
+        <div id="kibDropdown" class="ml-8 hidden flex-col space-y-1">
+          <a href="#" class="block px-2 py-1 text-sm text-gray-600 hover:text-blue-600">KIB A</a>
+          <a href="#" class="block px-2 py-1 text-sm text-gray-600 hover:text-blue-600">KIB B</a>
+        </div>
+        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+          <i class="bi bi-bar-chart"></i> Laporan
+        </a>
+      </div>
+    </nav>
+
+    <!-- Konten utama -->
+    <main class="flex-1 p-4 md:p-6 bg-white/70 backdrop-blur-md shadow-inner rounded-tl-2xl md:pl-64">
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div class="p-4 rounded-2xl shadow bg-gradient-to-br from-green-100 to-green-50 border border-green-200">
+          <h3 class="font-bold text-green-800">Kecamatan Sojol</h3>
+          <p class="text-2xl font-extrabold text-green-900">12 Sekolah</p>
+        </div>
+        <div class="p-4 rounded-2xl shadow bg-gradient-to-br from-blue-100 to-blue-50 border border-blue-200">
+          <h3 class="font-bold text-blue-800">Kecamatan Banawa</h3>
+          <p class="text-2xl font-extrabold text-blue-900">18 Sekolah</p>
+        </div>
+        <div class="p-4 rounded-2xl shadow bg-gradient-to-br from-purple-100 to-purple-50 border border-purple-200">
+          <h3 class="font-bold text-purple-800">Kecamatan Sindue</h3>
+          <p class="text-2xl font-extrabold text-purple-900">9 Sekolah</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full bg-gradient-to-r from-blue-600 to-green-600 py-4 px-6 shadow-inner relative">
+    <div class="text-center">
+      <p class="text-base md:text-lg text-white font-bold tracking-wide"
+         style="text-shadow: 0 0 8px rgba(255,255,255,0.7);">
+        DINAS PENDIDIKAN DAN KEBUDAYAAN
+      </p>
+      <p class="text-sm text-white font-semibold tracking-wide"
+         style="text-shadow: 0 0 6px rgba(255,255,255,0.7);">
+        KOMBEL TONDA TALUSI - SOU BATIK
+      </p>
+    </div>
+    <p class="absolute bottom-2 right-4 text-xs md:text-sm text-white/90 font-medium tracking-wide">
+      Terakhir diperbarui: <span id="now"></span>
+    </p>
+  </footer>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+
+    // Tutup sidebar otomatis setelah klik menu (hanya di HP)
+    const sidebarLinks = sidebar.querySelectorAll("a");
+    sidebarLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 768) {
+          sidebar.classList.add("-translate-x-full");
+        }
+      });
+    });
+
+    // Dropdown toggle
+    const kibBtn = document.getElementById('kibBtn');
+    const kibDropdown = document.getElementById('kibDropdown');
+    const kibArrow = document.getElementById('kibArrow');
+    kibBtn.addEventListener('click', () => {
+      kibDropdown.classList.toggle('hidden');
+      kibArrow.classList.toggle('rotate-90');
+    });
+
+    // Tanggal update
+    const now = new Date();
+    document.getElementById('now').textContent =
+      now.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  </script>
+</body>
+</html>
