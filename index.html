@@ -20,7 +20,7 @@
     .rotate-90 { transform: rotate(90deg); }
   </style>
 </head>
-<body class="bg-gray-50 font-sans flex min-h-screen">
+<body class="bg-gray-50 font-sans flex flex-col min-h-screen">
 
   <!-- Sidebar -->
   <nav id="sidebar" class="hidden md:flex w-64 bg-white shadow-md border-r border-gray-200 flex-shrink-0 flex-col z-50">
@@ -52,7 +52,6 @@
 
   <!-- Konten utama -->
   <main class="flex-1 p-6 overflow-auto max-w-full">
-
     <!-- Tombol Toggle Sidebar (Mobile) -->
     <button id="mobileMenuBtn" class="md:hidden mb-4 px-4 py-2 bg-blue-600 text-white rounded focus:outline-none">
       ☰ Menu
@@ -77,6 +76,14 @@
       <ul id="pagination" class="inline-flex space-x-1"></ul>
     </nav>
   </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-gradient-to-r from-blue-600 to-green-600 py-4 text-center shadow-inner">
+    <p class="text-sm text-white font-semibold tracking-wide" 
+       style="text-shadow: 0 0 6px rgba(255,255,255,0.7);">
+      KOMBEL TONDA TALUSI - SOU BATIK
+    </p>
+  </footer>
 
   <script>
     // Toggle KIB dropdown
