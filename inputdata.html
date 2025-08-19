@@ -12,17 +12,17 @@
   <!-- Sidebar -->
   <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white/90 backdrop-blur-lg shadow-lg transform -translate-x-full md:translate-x-0 transition-transform z-40">
     <div class="p-4 border-b">
-      <h2 class="text-lg font-bold text-blue-700">Menu </h2>
+      <h2 class="text-lg font-bold text-blue-700">Menu Navigasi</h2>
     </div>
     <nav class="p-4 space-y-2">
-      <a href="index.html" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100"><i class="bi bi-house-door"></i> Beranda</a>
+      <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100"><i class="bi bi-house-door"></i> Beranda</a>
       <button id="kibBtn" class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-blue-100">
         <span class="flex items-center gap-2"><i class="bi bi-archive"></i> Input Data Aset</span>
         <i id="kibArrow" class="bi bi-chevron-right transition-transform"></i>
       </button>
       <div id="kibDropdown" class="ml-6 mt-1 space-y-1 hidden">
         <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB A</a>
-        <a href="inputdata.html" class="block p-2 rounded-lg hover:bg-green-100">KIB B</a>
+        <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB B</a>
         <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB C</a>
       </div>
     </nav>
@@ -54,6 +54,15 @@
 
     <!-- Konten utama -->
     <main class="flex-1 p-4 md:p-6 bg-white/70 backdrop-blur-md shadow-inner rounded-tl-2xl">
+      
+      <!-- Search Bar -->
+      <div class="mb-4 flex items-center gap-2">
+        <i class="bi bi-search text-gray-500 text-lg"></i>
+        <input id="search" type="text" placeholder="Cari kecamatan..."
+          class="w-full md:w-1/2 p-2 rounded-lg border shadow-sm focus:ring focus:ring-blue-300 outline-none">
+      </div>
+
+      <!-- Grid kartu -->
       <div id="cards" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
     </main>
   </div>
@@ -131,22 +140,33 @@
       { name: 'Sojol Utara', url: 'https://docs.google.com/spreadsheets/d/1LEeF0XiUncQPVNSCV0-kVl6B45sPryhC/edit?gid=502544387' },
     ];
 
-    // Generate kartu
+    // Fungsi render kartu
     const container = document.getElementById("cards");
-    data.forEach((d, i) => {
-      const div = document.createElement("a");
-      div.href = d.url;
-      div.target = "_blank";
-      div.className = `p-4 rounded-2xl shadow border transition hover:shadow-lg hover:scale-[1.02] bg-gradient-to-br ${
-        i % 3 === 0 ? "from-green-100 to-green-50 border-green-200" :
-        i % 3 === 1 ? "from-blue-100 to-blue-50 border-blue-200" :
-                      "from-purple-100 to-purple-50 border-purple-200"
-      }`;
-      div.innerHTML = `
-        <h3 class="font-bold">${d.name}</h3>
-        <p class="text-sm text-gray-700">Klik untuk input data</p>
-      `;
-      container.appendChild(div);
+    function renderCards(filterText = "") {
+      container.innerHTML = "";
+      data
+        .filter(d => d.name.toLowerCase().includes(filterText.toLowerCase()))
+        .forEach((d, i) => {
+          const div = document.createElement("a");
+          div.href = d.url;
+          div.target = "_blank";
+          div.className = `p-4 rounded-2xl shadow border transition hover:shadow-lg hover:scale-[1.02] bg-gradient-to-br ${
+            i % 3 === 0 ? "from-green-100 to-green-50 border-green-200" :
+            i % 3 === 1 ? "from-blue-100 to-blue-50 border-blue-200" :
+                          "from-purple-100 to-purple-50 border-purple-200"
+          }`;
+          div.innerHTML = `
+            <h3 class="font-bold">${d.name}</h3>
+            <p class="text-sm text-gray-700">Klik untuk input data</p>
+          `;
+          container.appendChild(div);
+        });
+    }
+    renderCards();
+
+    // Event pencarian
+    document.getElementById("search").addEventListener("input", (e) => {
+      renderCards(e.target.value);
     });
 
     // Tanggal update
@@ -155,5 +175,3 @@
   </script>
 </body>
 </html>
-
-
