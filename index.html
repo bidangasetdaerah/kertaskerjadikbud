@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Data KIB Aset Dinas Pendidikan dan Kebudayaan</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     .eye-icon, .book-icon {
       cursor: pointer;
@@ -20,64 +21,68 @@
     .rotate-90 { transform: rotate(90deg); }
   </style>
 </head>
-<body class="bg-gray-50 font-sans flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-green-50 to-yellow-50 text-gray-800">
 
   <!-- Sidebar -->
-  <nav id="sidebar" class="hidden md:flex w-64 bg-white shadow-md border-r border-gray-200 flex-shrink-0 flex-col z-50">
-    <div class="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-8 w-auto object-contain" loading="lazy" />
-      <span class="text-lg font-semibold text-blue-700">ASET DIKBUD</span>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-8 w-auto object-contain ml-auto" loading="lazy" />
+  <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white/90 backdrop-blur-lg shadow-lg transform -translate-x-full md:translate-x-0 transition-transform z-40">
+    <div class="p-4 border-b">
+      <h2 class="text-lg font-bold text-blue-700">Menu Navigasi</h2>
     </div>
-
-    <!-- Menu Master Data -->
-    <div class="group border-b border-gray-200">
-      <a href="#" data-sheet="Master Data" class="px-6 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 block">Master Data</a>
-    </div>
-
-    <!-- Menu KIB Dropdown -->
-    <div class="group border-b border-gray-200">
-      <button id="kibBtn" class="w-full flex justify-between items-center px-6 py-3 hover:bg-blue-100 focus:outline-none">
-        <span class="font-medium text-gray-700">KIB</span>
-        <svg id="kibArrow" class="w-4 h-4 text-gray-500 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
+    <nav class="p-4 space-y-2">
+      <a href="#" data-sheet="Master Data" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100">
+        <i class="bi bi-house-door"></i> Beranda
+      </a>
+      <button id="kibBtn" class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-blue-100">
+        <span class="flex items-center gap-2"><i class="bi bi-archive"></i> Input Data Aset</span>
+        <i id="kibArrow" class="bi bi-chevron-right transition-transform"></i>
       </button>
-      <div id="kibDropdown" class="hidden flex flex-col bg-gray-50 border-t border-gray-200">
-        <a href="inputdata.html" class="px-10 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 kib-link">Input KIB B</a>
-        <a href="#" class="px-10 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 kib-link">Input KIB C</a>
+      <div id="kibDropdown" class="ml-6 mt-1 space-y-1 hidden">
+        <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB A</a>
+        <a href="inputdata.html" class="block p-2 rounded-lg hover:bg-green-100">KIB B</a>
+        <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB C</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </aside>
+
+  <!-- Overlay HP -->
+  <div id="overlay" class="fixed inset-0 bg-black/40 hidden z-30 md:hidden"></div>
 
   <!-- Konten utama -->
-  <main class="flex-1 p-6 overflow-auto max-w-full">
-    <!-- Tombol Toggle Sidebar (Mobile) -->
-    <button id="mobileMenuBtn" class="md:hidden mb-4 px-4 py-2 bg-blue-600 text-white rounded focus:outline-none">
-      ☰ Menu
-    </button>
+  <div class="flex-1 flex flex-col md:pl-64">
+    <!-- Header -->
+    <header class="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b flex items-center">
+      <div class="mx-auto w-full px-4 py-4 flex items-center gap-3">
+        <!-- Tombol menu HP -->
+        <button id="menuToggle" class="md:hidden p-2 rounded-lg border bg-white shadow-sm">
+          <i class="bi bi-list text-2xl"></i>
+        </button>
+        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight ml-2 md:ml-4">
+          Data Satuan Pendidikan Jenjang SD-SMP Negeri dan Swasta
+        </h1>
+      </div>
+    </header>
 
-    <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Data Satuan Pendidikan Jenjang SD-SMP Negeri dan Swasta</h2>
+    <main class="flex-1 p-6 overflow-auto max-w-full">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 max-w-5xl mx-auto">
+        <input id="searchInput" type="text" placeholder="Cari data sekolah..." class="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
 
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 max-w-5xl mx-auto">
-      <input id="searchInput" type="text" placeholder="Cari data sekolah..." class="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-    </div>
+      <div class="overflow-x-auto max-w-7xl mx-auto shadow rounded-lg bg-white">
+        <table id="dataTable" class="min-w-full table-auto border-collapse border border-gray-300">
+          <thead class="bg-blue-600 text-white">
+            <tr id="tableHeader" class="text-center"></tr>
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
 
-    <div class="overflow-x-auto max-w-7xl mx-auto shadow rounded-lg bg-white">
-      <table id="dataTable" class="min-w-full table-auto border-collapse border border-gray-300">
-        <thead class="bg-blue-600 text-white">
-          <tr id="tableHeader" class="text-center"></tr>
-        </thead>
-        <tbody id="tableBody" class="divide-y divide-gray-200"></tbody>
-      </table>
-    </div>
+      <nav aria-label="Pagination" class="mt-6 flex justify-center">
+        <ul id="pagination" class="inline-flex space-x-1"></ul>
+      </nav>
+    </main>
+  </div>
 
-    <nav aria-label="Pagination" class="mt-6 flex justify-center">
-      <ul id="pagination" class="inline-flex space-x-1"></ul>
-    </nav>
-  </main>
-
-   <!-- Footer -->
+  <!-- Footer -->
   <footer class="w-full bg-gradient-to-r from-blue-600 to-green-600 py-4 text-center shadow-inner">
     <p class="text-base md:text-lg text-white font-bold tracking-wide"
        style="text-shadow: 0 0 8px rgba(255,255,255,0.7);">
@@ -88,25 +93,31 @@
       KOMBEL TONDA TALUSI - SOU BATIK
     </p>
   </footer>
-  <script>
-    // Toggle KIB dropdown
-    function toggleDropdown(btnId, dropdownId, arrowId) {
-      const btn = document.getElementById(btnId);
-      const dropdown = document.getElementById(dropdownId);
-      const arrow = document.getElementById(arrowId);
-      btn.addEventListener('click', () => {
-        dropdown.classList.toggle('hidden');
-        arrow.classList.toggle('rotate-90');
-      });
-    }
-    toggleDropdown('kibBtn', 'kibDropdown', 'kibArrow');
 
-    // Toggle sidebar on mobile
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('hidden');
+  <script>
+    // Sidebar toggle (mobile)
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    });
+    overlay.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
     });
 
+    // Dropdown toggle
+    const kibBtn = document.getElementById('kibBtn');
+    const kibDropdown = document.getElementById('kibDropdown');
+    const kibArrow = document.getElementById('kibArrow');
+    kibBtn.addEventListener('click', () => {
+      kibDropdown.classList.toggle('hidden');
+      kibArrow.classList.toggle('rotate-90');
+    });
+
+    // Spreadsheet logic
     const SPREADSHEET_ID = '152oNQyrJEeg-xW3okB2LKbGIUapxDakDMCbDjqpDl3U';
     const SHEET_NAME = 'Master Data';
     const rowsPerPage = 50;
@@ -215,6 +226,7 @@
       renderTablePage(1);
     });
 
+    // Menu Master Data klik
     document.querySelectorAll('[data-sheet]').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
