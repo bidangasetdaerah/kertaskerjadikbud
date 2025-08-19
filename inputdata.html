@@ -12,18 +12,170 @@
   <!-- Sidebar -->
   <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white/90 backdrop-blur-lg shadow-lg transform -translate-x-full md:translate-x-0 transition-transform z-40">
     <div class="p-4 border-b">
-      <h2 class="text-lg font-bold text-blue-700">DINAS PENDIDIKAN DAN KEBUDAYAAN</h2>
+      <h2 class="text-lg font-bold text-blue-700">Menu Navigasi</h2>
     </div>
     <nav class="p-4 space-y-2">
-      <a href="index.html" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100"><i class="bi bi-house-door"></i> Beranda</a>
+      <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100"><i class="bi bi-house-door"></i> Beranda</a>
       <button id="kibBtn" class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-blue-100">
         <span class="flex items-center gap-2"><i class="bi bi-archive"></i> Input Data Aset</span>
         <i id="kibArrow" class="bi bi-chevron-right transition-transform"></i>
       </button>
       <div id="kibDropdown" class="ml-6 mt-1 space-y-1 hidden">
         <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB A</a>
-        <a href="inputdata.html" class="block p-2 rounded-lg hover:bg-green-100">KIB B</a>
+        <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB B</a>
         <a href="#" class="block p-2 rounded-lg hover:bg-green-100">KIB C</a>
       </div>
     </nav>
   </aside>
+
+  <!-- Overlay HP -->
+  <div id="overlay" class="fixed inset-0 bg-black/40 hidden z-30 md:hidden"></div>
+
+  <!-- Main wrapper -->
+  <div class="flex-1 flex flex-col md:pl-64">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b flex items-center">
+      <div class="mx-auto w-full px-4 py-4 flex items-center gap-3">
+        <!-- Tombol menu HP -->
+        <button id="menuToggle" class="md:hidden p-2 rounded-lg border bg-white shadow-sm">
+          <i class="bi bi-list text-2xl"></i>
+        </button>
+        <div class="flex items-center gap-2 mr-2">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Donggala.png" alt="Lambang Kabupaten Donggala" class="h-10 w-auto object-contain" loading="lazy" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Tut Wuri Handayani" class="h-10 w-auto object-contain" loading="lazy" />
+        </div>
+        <!-- Judul -->
+        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight ml-2 md:ml-4">
+          INPUT DATA ASET SEKOLAH – KIB B
+        </h1>
+      </div>
+    </header>
+
+    <!-- Konten utama -->
+    <main class="flex-1 p-4 md:p-6 bg-white/70 backdrop-blur-md shadow-inner rounded-tl-2xl">
+      <!-- Kolom Pencarian -->
+      <div class="mb-4 flex justify-center">
+        <input 
+          id="searchInput" 
+          type="text" 
+          placeholder="Cari kecamatan..." 
+          class="w-full md:w-1/2 p-3 rounded-xl border shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+        />
+      </div>
+
+      <!-- Kartu -->
+      <div id="cards" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full bg-gradient-to-r from-blue-600 to-green-600 py-5 px-6 shadow-inner relative">
+    <div class="text-center">
+      <p class="text-base md:text-lg text-white font-bold tracking-wide"
+         style="text-shadow: 0 0 8px rgba(255,255,255,0.7);">
+        DINAS PENDIDIKAN DAN KEBUDAYAAN
+      </p>
+      <p class="text-sm text-white font-semibold tracking-wide"
+         style="text-shadow: 0 0 6px rgba(255,255,255,0.7);">
+        KOMBEL TONDA TALUSI - SOU BATIK
+      </p>
+    </div>
+    <p class="absolute bottom-2 right-4 text-xs md:text-sm text-white/90 font-medium tracking-wide">
+      Terakhir diperbarui: <span id="now"></span>
+    </p>
+  </footer>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+
+    // Tutup sidebar otomatis setelah klik menu (hanya di HP)
+    const sidebarLinks = sidebar.querySelectorAll("a");
+    sidebarLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 768) {
+          sidebar.classList.add("-translate-x-full");
+          overlay.classList.add("hidden");
+        }
+      });
+    });
+
+    // Dropdown toggle
+    const kibBtn = document.getElementById('kibBtn');
+    const kibDropdown = document.getElementById('kibDropdown');
+    const kibArrow = document.getElementById('kibArrow');
+    kibBtn.addEventListener('click', () => {
+      kibDropdown.classList.toggle('hidden');
+      kibArrow.classList.toggle('rotate-90');
+    });
+
+    // Data kecamatan
+    const data = [
+      { name: 'Banawa', url: 'https://docs.google.com/spreadsheets/d/1Ql_xKix5CFAedhZRTu_kw_7gnKKZYevY/edit?gid=1917777904' },
+      { name: 'Banawa Tengah', url: 'https://docs.google.com/spreadsheets/d/1cvgNSBgTX4pcCXEXWMsupF0NmMLxhERJ/edit?gid=1454720232' },
+      { name: 'Banawa Selatan', url: 'https://docs.google.com/spreadsheets/d/1JGop98g-bmxX8xq9SpVedCHJ7z8p8aTV/edit?gid=708970016' },
+      { name: 'Rio Pakava', url: 'https://docs.google.com/spreadsheets/d/1_8YllqyTXGDZZCVeozFKAhGru2WS15Bp/edit?usp=drive_link&ouid=103182395121719464662&rtpof=true&sd=true' },
+      { name: 'Pinembani', url: 'https://docs.google.com/spreadsheets/d/1POiI7Ii8JyeNF-jNNxCpsjTnbtO73qWm/edit?gid=1860451546' },
+      { name: 'Tanantovea', url: 'https://docs.google.com/spreadsheets/d/1o_tb8Tfzk5Cojq5wGvEs7AYCgSj06kLaI5H4K9O4-AY/edit?gid=1200528899' },
+      { name: 'Labuan', url: 'https://docs.google.com/spreadsheets/d/1sKA5fl_gufKaFxTbhOGkgJmL0gsAKdH_/edit?gid=1615242439' },
+      { name: 'Sindue', url: 'https://docs.google.com/spreadsheets/d/1kEhC50rEd85N4trFlcsyfsse1EEKfEH9/edit?gid=1920885371' },
+      { name: 'Sindue Tombusabora', url: 'https://docs.google.com/spreadsheets/d/1AKZNR_vle4v_G_OHi-aItgIGO6YARDNN/edit?gid=1974330298' },
+      { name: 'Sindue Tobata', url: 'https://docs.google.com/spreadsheets/d/1643If_Xhb2mufR_0NBrSA_4U_n6Fx3Gi/edit?gid=801352666' },
+      { name: 'Sirenja', url: 'https://docs.google.com/spreadsheets/d/1jABt9pgTKlI7v4mF_ik7wsGuTqd6s_o0/edit?gid=1937115064' },
+      { name: 'Balaesang', url: 'https://docs.google.com/spreadsheets/d/1vNnfLPLBv4AgxHJzNumDeSunKmTkFnsK/edit?gid=1401841928' },
+      { name: 'Balaesang Tanjung', url: 'https://docs.google.com/spreadsheets/d/15yJeSYt7gZ1FPlT8uSbYoARNiVMoWFWh/edit?gid=820099832' },
+      { name: 'Dampelas', url: 'https://docs.google.com/spreadsheets/d/1AXi8fGpuQoiaqF3cc37HWcg2ykGbS4Rc/edit?gid=1489077321' },
+      { name: 'Sojol', url: 'https://docs.google.com/spreadsheets/d/1PeilaS7lZV8pqOgowMx0YvJPTbRRStYJ/edit?gid=1781390946' },
+      { name: 'Sojol Utara', url: 'https://docs.google.com/spreadsheets/d/1LEeF0XiUncQPVNSCV0-kVl6B45sPryhC/edit?gid=502544387' },
+    ];
+
+    const container = document.getElementById("cards");
+
+    function renderCards(filteredData) {
+      container.innerHTML = "";
+      filteredData.forEach((d, i) => {
+        const div = document.createElement("a");
+        div.href = d.url;
+        div.target = "_blank";
+        div.className = `p-4 rounded-2xl shadow border transition hover:shadow-lg hover:scale-[1.02] bg-gradient-to-br ${
+          i % 3 === 0 ? "from-green-100 to-green-50 border-green-200" :
+          i % 3 === 1 ? "from-blue-100 to-blue-50 border-blue-200" :
+                        "from-purple-100 to-purple-50 border-purple-200"
+        }`;
+        div.innerHTML = `
+          <h3 class="font-bold">${d.name}</h3>
+          <p class="text-sm text-gray-700">Klik untuk input data</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Render awal
+    renderCards(data);
+
+    // Filter pencarian
+    document.getElementById("searchInput").addEventListener("input", function() {
+      const keyword = this.value.toLowerCase();
+      const filtered = data.filter(d => d.name.toLowerCase().includes(keyword));
+      renderCards(filtered);
+    });
+
+    // Tanggal update
+    document.getElementById("now").textContent =
+      new Date().toLocaleDateString("id-ID", { day:"2-digit", month:"long", year:"numeric" });
+  </script>
+</body>
+</html>
